@@ -18,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
     final double wt = MediaQuery.of(context).size.width;
     final today = DateTime.now();
     final helloose= 30;
-    int hellman=40;
+    int hellman=450;
     double carb = 64.5, prot = 33.7, fat = 23.2;
 
     return SafeArea(
