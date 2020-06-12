@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "759481942652",
+    "firebase_url": "https://fitness-app-tip.firebaseio.com",
+    "project_id": "fitness-app-tip",
+    "storage_bucket": "fitness-app-tip.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759481942652:android:a84b0bfa795bb82828bff9",
+        "android_client_info": {
+          "package_name": "com.ripbomb.flutterdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759481942652-7ktnln5n1dqna8hot523d4tctl14vc8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlgcx2s2_d2RN82-2cDywiK0PDS00h2go"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759481942652-7ktnln5n1dqna8hot523d4tctl14vc8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
