@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class WorkoutView extends StatelessWidget {
   String imgPath;
+  WorkoutView({this.imgPath});
   Widget build(BuildContext context) {
-    imgPath = ModalRoute.of(context).settings.arguments;
+   // imgPath = ModalRoute.of(context).settings.arguments;
     final double ht = MediaQuery.of(context).size.height;
     final double wt = MediaQuery.of(context).size.width;
     return SafeArea(

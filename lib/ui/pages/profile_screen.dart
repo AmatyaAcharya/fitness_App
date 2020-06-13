@@ -33,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
           bottomNavigationBar: NavBar(),
           body: Stack(
             children: <Widget>[
-             /*Upper info block*/ Positioned(
+              /*Upper info block*/ Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
@@ -92,16 +92,16 @@ class ProfileScreen extends StatelessWidget {
                                   height: ht * 0.04,
                                   width: wt * 0.43,
                                   child: FloatingActionButton.extended(
-                                      splashColor: Colors.white,
-                                      backgroundColor: Colors.red[900],
-                                      icon: Icon(
-                                        Icons.add_circle,
-                                      ),
-                                      onPressed: () =>
-                                          dia.calorieDialog(context),
-                                      label: Text(
-                                        "Add Calorie Intake",
-                                      )),
+                                    splashColor: Colors.white,
+                                    backgroundColor: Colors.red[900],
+                                    icon: Icon(
+                                      Icons.add_circle,
+                                    ),
+                                    onPressed: () => dia.calorieDialog(context),
+                                    label: Text(
+                                      "Add Calorie Intake",
+                                    ),
+                                  ),
                                 ),
                                 NutritionIntake(
                                   nutrition: "CARBS",
@@ -136,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-             /*recipe/workout preview block*/ Positioned(
+              /*recipe/workout preview block*/ Positioned(
                 top: ht * 0.38,
                 right: 0,
                 left: 0,
