@@ -8,7 +8,16 @@ class SavedWorkoutBar extends StatelessWidget {
     return InkWell(
       highlightColor: Colors.transparent,
       splashColor: Colors.white,
-      onTap: () => Navigator.pushNamed(context, '/savedworkout'),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return SavedWorkoutScreen();
+            },
+          ),
+        );
+      }, //() => Navigator.pushNamed(context, '/savedworkout'),
       child: Container(
         margin: const EdgeInsets.only(
           left: 20,

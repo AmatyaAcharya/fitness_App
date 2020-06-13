@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'workout_view.dart';
+
 class WorkView extends StatelessWidget {
   final String imgPath;
 
@@ -12,7 +13,15 @@ class WorkView extends StatelessWidget {
     return InkWell(
       onTap: () {
         print("photocheck");
-        Navigator.pushNamed(context, '/workoutview',arguments: imgPath);
+        //Navigator.pushNamed(context, '/workoutview',arguments: imgPath);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return WorkoutView(imgPath: imgPath);
+            },
+          ),
+        );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(20)),
