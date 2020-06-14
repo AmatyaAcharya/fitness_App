@@ -1,37 +1,102 @@
-import 'dart:ui';
-
+//import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutterdev/sampledata/recipe.dart';
-import 'package:flutterdev/ui/pages/calorie_adder.dart';
-import 'package:flutterdev/ui/pages/nutrition_intake.dart';
-import 'package:flutterdev/ui/pages/recipe_prev.dart';
-import 'package:flutterdev/ui/pages/saved_workout_bar.dart';
-import 'nav_bar.dart';
-import 'package:flutterdev/ui/pages/radial_progress.dart';
-import 'package:intl/intl.dart';
+//import 'package:flutterdev/sampledata/recipe.dart';
+import 'package:flutterdev/ui/pages/homepage/calorie_adder.dart';
+//import 'package:flutterdev/ui/pages/homepage/nutrition_intake.dart';
+//import 'package:flutterdev/ui/pages/homepage/recipe_prev.dart';
+//import 'package:flutterdev/ui/pages/homepage/saved_workout_bar.dart';
+import 'package:flutterdev/ui/pages/homepage/user_home_screen.dart';
+import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
+//import 'nav_bar.dart';
+//import 'package:flutterdev/ui/pages/homepage/radial_progress.dart';
+//import 'package:intl/intl.dart';
 
-class ProfileScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  int currentIndex;
+   HomeScreen(this.currentIndex);
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  
+ //int check = widget.currentInd;
+  Widget callPage(int currentindex) {
+    switch (currentindex) {
+      case 0:
+        return UserHomeScreen();
+      case 1:
+        return null;
+      case 2:
+        return ProfilePage();
+        break;
+      default:
+    }
+  }
+
   CalorieAdder dia = new CalorieAdder();
+
   @override
   Widget build(BuildContext context) {
-    final double ht = MediaQuery.of(context).size.height;
-    final double wt = MediaQuery.of(context).size.width;
-    final today = DateTime.now();
-    double carb = 64.5, prot = 33.7, fat = 23.2;
-
     return SafeArea(
       child: Container(
         //width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Colors.grey[850], Colors.black87],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        )),
+          gradient: LinearGradient(
+            colors: [Colors.grey[850], Colors.black87],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          bottomNavigationBar: NavBar(),
-          body: Stack(
+          bottomNavigationBar: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            child: BottomNavigationBar(
+              currentIndex: widget.currentIndex,
+              onTap: (value) => (setState(() => widget.currentIndex = value)),
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.home, color: Colors.white),
+                  title: Text(
+                    "Home",
+                    style: TextStyle(color: Colors.grey[900]),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.fastfood, color: Colors.white),
+                  title: Text(
+                    "Recipes",
+                    style: TextStyle(color: Colors.grey[900]),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: const Icon(Icons.person, color: Colors.white),
+                  title: Text(
+                    "Profile",
+                    style: TextStyle(color: Colors.grey[900]),
+                  ),
+                )
+              ],
+              backgroundColor: Colors.grey[900],
+              iconSize: 27.5,
+              type: BottomNavigationBarType.fixed,
+              selectedLabelStyle: TextStyle(color: Color(0xFFe83323)),
+              selectedItemColor: Color(0xFFe83323),
+              selectedIconTheme: IconThemeData(color: Color(0xFFe83323)),
+              showSelectedLabels: true,
+            ),
+          ),
+          body: callPage(widget.currentIndex),
+        ),
+      ),
+    );
+  }
+}
+/*Stack(
             children: <Widget>[
               /*Upper info block*/ Positioned(
                 top: 0,
@@ -181,9 +246,4 @@ class ProfileScreen extends StatelessWidget {
                 ),
               )
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+          ),*/

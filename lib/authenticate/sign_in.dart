@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdev/Shared/loading.dart';
 import 'package:flutterdev/authenticate/auth.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({this.toggleView});
-
+  
   @override
   _SignInState createState() => _SignInState();
 }
@@ -13,6 +14,8 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
+  bool loading = false;
+  
 
   // text field state
   String email = '';
@@ -22,7 +25,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     final double ht = MediaQuery.of(context).size.height;
     final double wt = MediaQuery.of(context).size.height;
-    return SafeArea(
+    return loading? Loading() : SafeArea(
       child: Scaffold(
         body: Container(
           alignment: Alignment.center,
@@ -43,6 +46,7 @@ class _SignInState extends State<SignIn> {
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -114,7 +118,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 20.0),
                   SizedBox(
                     width: wt * 1 / 4.5,
-                    height: ht*1/17.5,
+                    height: ht * 1 / 17.5,
                     child: RaisedButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
@@ -122,17 +126,17 @@ class _SignInState extends State<SignIn> {
                         child: Text(
                           'Sign In',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18
-                          ),
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18),
                         ),
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
-                            dynamic result = await _auth
-                                .signInWithEmailAndPassword(email, password);
+                            setState(() => loading = true);
+                            dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                             if (result == null) {
                               setState(() {
+                                loading = false;
                                 error =
                                     'Could not sign in with those credentials';
                               });

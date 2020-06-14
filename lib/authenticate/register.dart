@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdev/Shared/loading.dart';
 import 'package:flutterdev/authenticate/auth.dart';
 
 class Register extends StatefulWidget {
@@ -13,7 +14,7 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
-
+  bool loading= false;
   // text field state
   String email = '';
   String password = '';
@@ -22,7 +23,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     final double ht = MediaQuery.of(context).size.height;
     final double wt = MediaQuery.of(context).size.height;
-    return SafeArea(
+    return loading? Loading() :SafeArea(
       child: Scaffold(
         body: Container(
           alignment: Alignment.center,
@@ -43,6 +44,7 @@ class _RegisterState extends State<Register> {
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,10 +131,12 @@ class _RegisterState extends State<Register> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
+                            setState(() => loading = true);
                             dynamic result = await _auth
                                 .registerWithEmailAndPassword(email, password);
                             if (result == null) {
                               setState(() {
+                                loading = false;
                                 error = 'Please supply a valid email';
                               });
                             }

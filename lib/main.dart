@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdev/authenticate/auth.dart';
 import 'package:flutterdev/authenticate/user.dart';
-import 'package:flutterdev/ui/pages/profile_screen.dart';
-import 'package:flutterdev/ui/pages/saved_workout_screen.dart';
-import 'package:flutterdev/ui/pages/workout_view.dart';
+import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
+//import 'package:flutterdev/uiprofilepage/profilepage.dart';
+import 'package:flutterdev/ui/pages/home_screen.dart';
+import 'package:flutterdev/ui/pages/homepage/saved_workout_screen.dart';
+import 'package:flutterdev/ui/pages/homepage/workout_view.dart';
 import 'wrapper.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +18,9 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        //home: Wrapper(),
-        home: ProfileScreen(),
+        home: Wrapper(),
+        //home: HomeScreen(0),
+        //home:ProfilePage(),
       ),
     );
   }
