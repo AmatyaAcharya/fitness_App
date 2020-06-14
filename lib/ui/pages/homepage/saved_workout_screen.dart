@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:flutterdev/ui/pages/saved_workout_gridview.dart';
+import 'package:flutterdev/ui/pages/homepage/saved_workout_gridview.dart';
 
 class SavedWorkoutScreen extends StatelessWidget {
   final workOuts = [

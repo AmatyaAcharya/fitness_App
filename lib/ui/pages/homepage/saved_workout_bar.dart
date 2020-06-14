@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdev/ui/pages/saved_workout_screen.dart';
+import 'package:flutterdev/ui/pages/homepage/saved_workout_screen.dart';
 
 class SavedWorkoutBar extends StatelessWidget {
   @override
