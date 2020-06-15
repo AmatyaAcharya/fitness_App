@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterdev/authenticate/user.dart';
+import 'package:flutterdev/services/database.dart';
 
 class AuthService {
   static int check;
@@ -7,15 +8,15 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
-  User _userFromFirebaseUser(FirebaseUser user,) {
+  User _userFromFirebaseUser(FirebaseUser user,int ch) {
     print('hello $check');
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(user.uid,ch) : null;
   }
   
   // auth change user stream
   Stream<User> get user {
     return _auth.onAuthStateChanged
-      .map((FirebaseUser user) => _userFromFirebaseUser(user));
+      .map((FirebaseUser user) => _userFromFirebaseUser(user,check));
       //.map(_userFromFirebaseUser);
   }
 
@@ -37,8 +38,11 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      DatabaseService.ud=user.uid;//(attempt to get user id)
       //print('hello $check');
-      return _userFromFirebaseUser(user);
+      
+      
+      return _userFromFirebaseUser(user,check);
     } catch (error) {
       print(error.toString());
       return null;
@@ -47,14 +51,18 @@ class AuthService {
 
 
   // register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(String email, String password,String help) async {
     check=1;
     try {
       
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      DatabaseService.ud=user.uid;//(attempt to get user id)
       //print('hello $check');
-      return _userFromFirebaseUser(user);
+      //create a new document for the user with the uid
+      await DatabaseService().updateUserData("defualt name", "18", help, "0");
+      
+      return _userFromFirebaseUser(user,check);
     } catch (error) {
       print(error.toString());
       return null;

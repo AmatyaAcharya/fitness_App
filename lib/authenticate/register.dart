@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterdev/Shared/loading.dart';
-import 'package:flutterdev/authenticate/auth.dart';
+
+import 'package:flutterdev/services/auth.dart';
 
 class Register extends StatefulWidget {
+   String email = '';
   final Function toggleView;
   Register({this.toggleView});
 
@@ -16,7 +18,7 @@ class _RegisterState extends State<Register> {
   String error = '';
   bool loading= false;
   // text field state
-  String email = '';
+ 
   String password = '';
 
   @override
@@ -82,7 +84,7 @@ class _RegisterState extends State<Register> {
                         hintText: "Enter a valid Email ID"),
                     validator: (val) => val.isEmpty ? 'Enter an email' : null,
                     onChanged: (val) {
-                      setState(() => email = val);
+                      setState(() => widget.email = val);
                     },
                   ),
                   SizedBox(height: 20.0),
@@ -133,7 +135,7 @@ class _RegisterState extends State<Register> {
                           if (_formKey.currentState.validate()) {
                             setState(() => loading = true);
                             dynamic result = await _auth
-                                .registerWithEmailAndPassword(email, password);
+                                .registerWithEmailAndPassword(widget.email, password,"72");
                             if (result == null) {
                               setState(() {
                                 loading = false;

@@ -1,5 +1,9 @@
 //import 'dart:ui';
+import 'dart:async';
+import 'package:flutterdev/Models/datamod.dart';
+import 'package:flutterdev/authenticate/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterdev/services/database.dart';
 //import 'package:flutterdev/sampledata/recipe.dart';
 import 'package:flutterdev/ui/pages/homepage/calorie_adder.dart';
 //import 'package:flutterdev/ui/pages/homepage/nutrition_intake.dart';
@@ -7,20 +11,21 @@ import 'package:flutterdev/ui/pages/homepage/calorie_adder.dart';
 //import 'package:flutterdev/ui/pages/homepage/saved_workout_bar.dart';
 import 'package:flutterdev/ui/pages/homepage/user_home_screen.dart';
 import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
+import 'package:provider/provider.dart';
 //import 'nav_bar.dart';
 //import 'package:flutterdev/ui/pages/homepage/radial_progress.dart';
 //import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   int currentIndex;
-   HomeScreen(this.currentIndex);
+  HomeScreen(this.currentIndex);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
- //int check = widget.currentInd;
+  //int check = widget.currentInd;
+
   Widget callPage(int currentindex) {
     switch (currentindex) {
       case 0:
@@ -38,59 +43,66 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        //width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.grey[850], Colors.black87],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          bottomNavigationBar: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-            child: BottomNavigationBar(
-              currentIndex: widget.currentIndex,
-              onTap: (value) => (setState(() => widget.currentIndex = value)),
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.home, color: Colors.white),
-                  title: Text(
-                    "Home",
-                    style: TextStyle(color: Colors.grey[900]),
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.fastfood, color: Colors.white),
-                  title: Text(
-                    "Recipes",
-                    style: TextStyle(color: Colors.grey[900]),
-                  ),
-                ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.person, color: Colors.white),
-                  title: Text(
-                    "Profile",
-                    style: TextStyle(color: Colors.grey[900]),
-                  ),
-                )
-              ],
-              backgroundColor: Colors.grey[900],
-              iconSize: 27.5,
-              type: BottomNavigationBarType.fixed,
-              selectedLabelStyle: TextStyle(color: Color(0xFFe83323)),
-              selectedItemColor: Color(0xFFe83323),
-              selectedIconTheme: IconThemeData(color: Color(0xFFe83323)),
-              showSelectedLabels: true,
+    //my attempt at getting user id
+    //final user = Provider.of<User>(context);
+    //print(user.uid);
+    //print("print user uid ${DatabaseService.ud}");
+    return StreamProvider<List<Datamod>>.value(
+      value: DatabaseService().userspecfics,
+      child: SafeArea(
+        child: Container(
+          //width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.grey[850], Colors.black87],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
-          body: callPage(widget.currentIndex),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            bottomNavigationBar: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              child: BottomNavigationBar(
+                currentIndex: widget.currentIndex,
+                onTap: (value) => (setState(() => widget.currentIndex = value)),
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.home, color: Colors.white),
+                    title: Text(
+                      "Home",
+                      style: TextStyle(color: Colors.grey[900]),
+                    ),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.fastfood, color: Colors.white),
+                    title: Text(
+                      "Recipes",
+                      style: TextStyle(color: Colors.grey[900]),
+                    ),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.person, color: Colors.white),
+                    title: Text(
+                      "Profile",
+                      style: TextStyle(color: Colors.grey[900]),
+                    ),
+                  )
+                ],
+                backgroundColor: Colors.grey[900],
+                iconSize: 27.5,
+                type: BottomNavigationBarType.fixed,
+                selectedLabelStyle: TextStyle(color: Color(0xFFe83323)),
+                selectedItemColor: Color(0xFFe83323),
+                selectedIconTheme: IconThemeData(color: Color(0xFFe83323)),
+                showSelectedLabels: true,
+              ),
+            ),
+            body: callPage(widget.currentIndex),
+          ),
         ),
       ),
     );

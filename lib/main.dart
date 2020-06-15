@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdev/authenticate/auth.dart';
 import 'package:flutterdev/authenticate/user.dart';
+import 'package:flutterdev/services/auth.dart';
 import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
 //import 'package:flutterdev/uiprofilepage/profilepage.dart';
 import 'package:flutterdev/ui/pages/home_screen.dart';
