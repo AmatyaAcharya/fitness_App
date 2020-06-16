@@ -168,7 +168,7 @@ class _CalorieEditState extends State<CalorieEdit> {
                         caloriesdone: (int.parse(calories)+int.parse(userspecifics.caloriesdone)).toString() ??userspecifics.caloriesdone,
                         carbs: (double.parse(carbs)+double.parse(userspecifics.carbs)).toString()??userspecifics.carbs,
                         fat: (double.parse(fat)+double.parse(userspecifics.fat)).toString()??userspecifics.fat,
-                        protein: (double.parse(fat)+double.parse(userspecifics.fat)).toString()??userspecifics.protein,
+                        protein: (double.parse(protein)+double.parse(userspecifics.protein)).toString()??userspecifics.protein,
                         gender: userspecifics.gender,
                         
                         );
