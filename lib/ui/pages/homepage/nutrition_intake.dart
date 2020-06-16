@@ -5,7 +5,7 @@ class NutritionIntake extends StatelessWidget {
   final double amtConsumed;
   final double height, width;
   final Color progressColor;
-  final double parentAmt;
+   double parentAmt;
 
   NutritionIntake(
       {this.nutrition,
@@ -17,8 +17,14 @@ class NutritionIntake extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(parentAmt==0)
+    parentAmt=10;
     double wth = width * 0.27;
-    wth = wth * (amtConsumed / parentAmt);
+    var ch=amtConsumed/parentAmt;
+    if(ch==0)
+    wth = wth * 0.05;
+    else
+    wth = wth * ch;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

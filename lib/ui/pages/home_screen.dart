@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutterdev/Models/datamod.dart';
 import 'package:flutterdev/authenticate/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterdev/services/auth.dart';
 import 'package:flutterdev/services/database.dart';
 //import 'package:flutterdev/sampledata/recipe.dart';
 import 'package:flutterdev/ui/pages/homepage/calorie_adder.dart';
@@ -29,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget callPage(int currentindex) {
     switch (currentindex) {
       case 0:
-        return UserHomeScreen();
+        return StreamProvider<User>.value(
+            value: AuthService().user, child: UserHomeScreen());
       case 1:
         return null;
       case 2:
@@ -44,11 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     //my attempt at getting user id
-    //final user = Provider.of<User>(context);
+    final user = Provider.of<User>(context);
     //print(user.uid);
     //print("print user uid ${DatabaseService.ud}");
-    return StreamProvider<List<Datamod>>.value(
-      value: DatabaseService().userspecfics,
+    return StreamProvider<Datamod>.value(
+      value: DatabaseService(uid: user.uid).userspecfics,
       child: SafeArea(
         child: Container(
           //width: double.infinity,
