@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdev/authenticate/auth.dart';
 import 'package:flutterdev/authenticate/user.dart';
+import 'package:flutterdev/services/auth.dart';
 import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
 //import 'package:flutterdev/uiprofilepage/profilepage.dart';
 import 'package:flutterdev/ui/pages/home_screen.dart';
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Wrapper(),
+        //home:ProfilePage(),
         //home: HomeScreen(0),
         //home:ProfilePage(),
       ),

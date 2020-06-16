@@ -1,11 +1,70 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdev/authenticate/auth.dart';
+import 'package:flutterdev/Models/datamod.dart';
+import 'package:flutterdev/authenticate/user.dart';
+import 'package:flutterdev/services/auth.dart';
+import 'package:flutterdev/services/database.dart';
+import 'package:flutterdev/ui/pages/profilepage/detail_view.dart';
+import 'package:flutterdev/ui/pages/profilepage/settings_form.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfilePage extends StatelessWidget {
   final AuthService _auth = AuthService();
   String logout = "logout";
   @override
   Widget build(BuildContext context) {
+    // final double ht = MediaQuery.of(context) .size.height;
+    // final double wt = MediaQuery.of(context).size.height;
+    final user = Provider.of<User>(context);
+    Datamod dum =
+        new Datamod(age: '', uid: '', name: '', height: '', weight: '');
+    final userspecifics = Provider.of<Datamod>(context) ?? dum;
+    print(userspecifics.name);
+    print(userspecifics.uid);
+    // print(userspecifics.age);
+    //userspecifics.removeWhere((element) => element == null);
+    //print("user id milgaya ${user.uid}");
+    // print("users ki details $userspecifics");
+    // print(userspecifics[0].age);
+    void showSettingsPanel() {
+      showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return StreamProvider<Datamod>.value(
+              value: DatabaseService(uid: user.uid).userspecfics,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: const Radius.circular(30),
+                    topRight: const Radius.circular(30),
+                  ),
+                  child: Container(
+                    //color: Colors.black,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.grey[850],
+                          Colors.black87,
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                    //padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: SettingsForm(),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          });
+    }
+
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -19,26 +78,35 @@ class ProfilePage extends StatelessWidget {
         appBar: AppBar(
           title: RichText(
             text: TextSpan(
-              style: TextStyle(fontSize: 27, fontWeight:FontWeight.w400),
-              children: [
-              TextSpan(
-                text: 'User ',
-              ),
-              TextSpan(
-                text: 'Details',
-                style: TextStyle(color: Colors.red[800]),
-              ),
-            ]),
+                style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
+                children: [
+                  TextSpan(
+                    text: 'User ',
+                  ),
+                  TextSpan(
+                    text: 'Details',
+                    style: TextStyle(color: Colors.red[800]),
+                  ),
+                ]),
           ),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
+          leading: IconButton(
+              icon: Icon(
+                (Icons.settings),
+                color: Colors.white,
+              ),
+              onPressed: () => showSettingsPanel()),
           actions: <Widget>[
-            IconButton(
+            FlatButton.icon(
+                label: Text(
+                  'logout',
+                  style: TextStyle(color: Colors.white),
+                ),
                 icon: Icon(
                   (Icons.close),
                   color: Colors.white,
-                  semanticLabel: logout,
                 ),
                 onPressed: () async {
                   await _auth.signOut();
@@ -47,95 +115,7 @@ class ProfilePage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(
-                child: CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: AssetImage('assets/user.jpg'),
-                ),
-              ),
-              Divider(
-                color: Colors.grey[800],
-                height: 60.0,
-              ),
-              Text(
-                'NAME',
-                style: TextStyle(
-                  color: Colors.red[800],
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Text(
-                'Chun-Li',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 30.0),
-              Text(
-                'HOMETOWN',
-                style: TextStyle(
-                  color: Colors.red[800],
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Text(
-                'Beijing, China',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 30.0),
-              Text(
-                'CURRENT NINJA LEVEL',
-                style: TextStyle(
-                  color: Colors.red[800],
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Text(
-                '8',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.0,
-                  letterSpacing: 2.0,
-                ),
-              ),
-              SizedBox(height: 30.0),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.email,
-                    color: Colors.red[800],
-                  ),
-                  SizedBox(width: 10.0),
-                  Text(
-                    'chun.li@thenetninja.co.uk',
-                    style: TextStyle(
-                      color: Colors.grey[400],
-                      fontSize: 18.0,
-                      letterSpacing: 1.0,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
+          child: DetailView(),
         ),
       ),
     );
