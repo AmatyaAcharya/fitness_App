@@ -313,12 +313,15 @@ class RecipePageCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return RecipeDetailScreen(
-                recipe: recipe,
+                recip: recipe,
               );
             },
           ),
         );
-        if (User.chk == 1) showCalLeft();
+        if (User.chk == 1) 
+        showCalLeft();
+
+        
       },
     );
   }

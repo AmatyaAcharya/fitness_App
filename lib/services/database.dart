@@ -85,7 +85,6 @@ class DatabaseService {
 
   //dataobject from the snapshot, lengthy way
   List<Recipe> recipeDataFromSnapshot(QuerySnapshot snapshot) {
-    //print("This is it $ud");
     return snapshot.documents.map((doc) {
       return Recipe(
         carbs: doc.data['carbs'],

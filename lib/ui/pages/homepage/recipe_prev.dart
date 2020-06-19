@@ -269,7 +269,7 @@ class RecipeCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) {
               return RecipeDetailScreen(
-                recipe: recipe,
+                recip: recipe,
               );
             },
           ),

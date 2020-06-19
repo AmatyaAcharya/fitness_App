@@ -9,19 +9,21 @@ import 'package:flutterdev/ui/pages/homepage/user_home_screen.dart';
 import 'package:provider/provider.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
-  final Recipe recipe;
-  const RecipeDetailScreen({this.recipe});
-
+  final Recipe recip;
+  const RecipeDetailScreen({this.recip});
+  
   @override
   Widget build(BuildContext context) {
     final double ht = MediaQuery.of(context).size.height;
     final double wt = MediaQuery.of(context).size.width;
     final user = Provider.of<User>(context);
-
+    
     return StreamBuilder<Datamod>(
         stream: DatabaseService(uid: user.uid).userspecfics,
         builder: (context, snapshot) {
           Datamod dum = snapshot.data;
+          print("this is user caloriesdone: ${dum.caloriesdone}");
+          print("this is recipe kilocalorie burnt: ${recip.kiloCaloriesBurnt}");
           return Scaffold(
             backgroundColor: const Color(0xFFE9E9E9),
             body: CustomScrollView(
@@ -42,7 +44,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         fadeInDuration: const Duration(seconds: 1),
                         fadeInCurve: Curves.bounceIn,
                         placeholder: 'assets/loading.png',
-                        image: recipe.imagePath,
+                        image: recip.imagePath,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -62,7 +64,7 @@ class RecipeDetailScreen extends StatelessWidget {
                               color: /*Colors.whiteColor*/ Color(0xFFe83323),
                               size: 17),
                           Text(
-                            "${recipe.timeTaken}",
+                            "${recip.timeTaken}",
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 15,
@@ -84,7 +86,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         ],
                       ),
                           title: Text(
-                            recipe.name,
+                            recip.name,
                             style: TextStyle(
                               fontWeight: FontWeight.w800,
                               fontSize: 30,
@@ -101,29 +103,20 @@ class RecipeDetailScreen extends StatelessWidget {
                               ),
                               onPressed: () async {
                                 User.chk = 1;
-                                await DatabaseService(uid: user.uid)
-                                    .updateUserData(
+                                await DatabaseService(uid: user.uid).updateUserData(
                                   name: dum.name,
                                   age: dum.age,
                                   weight: dum.weight,
                                   height: dum.height,
                                   activelevel: dum.activelevel,
-                                  caloriesdone:
-                                      (int.parse(recipe.kiloCaloriesBurnt) +
-                                              int.parse(dum.caloriesdone))
-                                          .toString(),
-                                  carbs: (int.parse(recipe.carbs) +
-                                          int.parse(dum.carbs))
-                                      .toString(),
-                                  fat: (int.parse(recipe.fats) +
-                                          int.parse(dum.fat))
-                                      .toString(),
+                                  caloriesdone:(int.parse(recip.kiloCaloriesBurnt) +int.parse(dum.caloriesdone)).toString(),
+                                  carbs: (int.parse(recip.carbs) + int.parse(dum.carbs)).toString(),
+                                  fat: (int.parse(recip.fats) + int.parse(dum.fat)).toString(),
                                   gender: dum.gender,
-                                  protein: (int.parse(recipe.protein) +
-                                          int.parse(dum.protein))
-                                      .toString(),
+                                  protein: (int.parse(recip.protein) +int.parse(dum.protein)).toString(),
+                                  
                                 );
-                                Navigator.pop(context);
+                              Navigator.pop(context);
                               },
                               label: Text(
                                 "Add to intake",
@@ -143,28 +136,28 @@ class RecipeDetailScreen extends StatelessWidget {
                                 fontSize: 16),
                             children: [
                               TextSpan(
-                                text: "${recipe.kiloCaloriesBurnt} kcal",
+                                text: "${recip.kiloCaloriesBurnt} kcal",
                                 style: TextStyle(
                                   color: Colors.red[900],
                                 ),
                               ),
                               TextSpan(text: "\n"),
                               TextSpan(
-                                text: "${recipe.carbs}g carbs",
+                                text: "${recip.carbs}g carbs",
                                 style: TextStyle(
                                   color: Color(0XFFffce47),
                                 ),
                               ),
                               TextSpan(text: "\n"),
                               TextSpan(
-                                text: "${recipe.protein}g protein",
+                                text: "${recip.protein}g protein",
                                 style: TextStyle(
                                   color: Color(0XFF52c748),
                                 ),
                               ),
                               TextSpan(text: "\n"),
                               TextSpan(
-                                text: "${recipe.fats}g fats",
+                                text: "${recip.fats}g fats",
                                 style: TextStyle(
                                   color: Color(0XFF30eaff),
                                 ),
@@ -192,11 +185,11 @@ class RecipeDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            for (int i = 0; i < recipe.ingredients.length; i++)
+                            for (int i = 0; i < recip.ingredients.length; i++)
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 6),
                                 child: Text(
-                                  recipe.ingredients[i],
+                                  recip.ingredients[i],
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -218,7 +211,7 @@ class RecipeDetailScreen extends StatelessWidget {
                             fadeInDuration: const Duration(seconds: 1),
                             fadeInCurve: Curves.bounceIn,
                             placeholder: 'assets/loading.png',
-                            image: recipe.imageingre,
+                            image: recip.imageingre,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -245,7 +238,7 @@ class RecipeDetailScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             left: 16, right: 16, bottom: 32),
                         child: Text(
-                          recipe.preparation,
+                          recip.preparation,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -258,7 +251,7 @@ class RecipeDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            for (int i = 0; i < recipe.image.length; i++)
+                            for (int i = 0; i < recip.image.length; i++)
                               Padding(
                                 padding:
                                     const EdgeInsets.only(bottom: 6, top: 6),
@@ -268,7 +261,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                     fadeInDuration: const Duration(seconds: 1),
                                     fadeInCurve: Curves.bounceIn,
                                     placeholder: 'assets/loading.png',
-                                    image: recipe.image[i],
+                                    image: recip.image[i],
                                     fit: BoxFit.fill,
                                   ),
                                 ),
