@@ -1,8 +1,10 @@
 //import 'dart:ui';
 import 'dart:async';
 import 'package:flutterdev/Models/datamod.dart';
+import 'package:flutterdev/Models/workout.dart';
 import 'package:flutterdev/authenticate/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterdev/sampledata/recipe.dart';
 import 'package:flutterdev/services/auth.dart';
 import 'package:flutterdev/services/database.dart';
 //import 'package:flutterdev/sampledata/recipe.dart';
@@ -12,6 +14,7 @@ import 'package:flutterdev/ui/pages/homepage/calorie_adder.dart';
 //import 'package:flutterdev/ui/pages/homepage/saved_workout_bar.dart';
 import 'package:flutterdev/ui/pages/homepage/user_home_screen.dart';
 import 'package:flutterdev/ui/pages/profilepage/profilepage.dart';
+import 'package:flutterdev/ui/pages/recipelistpage/recipe_list.dart';
 import 'package:provider/provider.dart';
 //import 'nav_bar.dart';
 //import 'package:flutterdev/ui/pages/homepage/radial_progress.dart';
@@ -30,10 +33,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget callPage(int currentindex) {
     switch (currentindex) {
       case 0:
-        return StreamProvider<User>.value(
-            value: AuthService().user, child: UserHomeScreen());
+        {
+          return MultiProvider(providers: [
+            StreamProvider<User>.value(
+              value: AuthService().user,
+            ),
+            StreamProvider<List<Recipe>>.value(
+                value: DatabaseService().recipespecfics),
+                StreamProvider<List<Workouts>>.value(
+                value: DatabaseService().workoutspecfics),
+          ], child: UserHomeScreen());
+        }
       case 1:
-        return null;
+        return StreamProvider<List<Recipe>>.value(
+          value: DatabaseService().recipespecfics,
+          child: RecipeSection(),
+        );
       case 2:
         return ProfilePage();
         break;

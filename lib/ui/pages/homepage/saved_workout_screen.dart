@@ -1,8 +1,12 @@
 import "package:flutter/material.dart";
+import 'package:flutterdev/Models/workout.dart';
 import 'package:flutterdev/ui/pages/homepage/saved_workout_gridview.dart';
 
 class SavedWorkoutScreen extends StatelessWidget {
-  final workOuts = [
+  final List<Workouts> workouts;
+
+  SavedWorkoutScreen({this.workouts});
+  static final workOuts = [
     "assets/test1.png",
     "assets/test2.png",
     "assets/test3.png",
@@ -45,8 +49,8 @@ class SavedWorkoutScreen extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: <Widget>[
-                  for (int i = 0; i < workOuts.length; i++)
-                    WorkView(imgPath: workOuts[i]),
+                  for ( var i in workouts)
+                    WorkView(imgPath: i.workouts),
                 ],
               ),
               Positioned(

@@ -1,5 +1,6 @@
 class User {
-  int ch=0;
+  static int chk=0;
+  int ch;
   String uid;
   User(String ui,int c){
     uid=ui;

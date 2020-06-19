@@ -25,10 +25,12 @@ class WorkView extends StatelessWidget {
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        child: Image.asset(
-          imgPath,
-          //height: ht*0.9,
-          /*width: wt * 0.25,*/ fit: BoxFit.fill,
+        child: FadeInImage.assetNetwork(
+          fadeInDuration: const Duration(seconds: 1),
+          fadeInCurve: Curves.bounceIn,
+          placeholder: 'assets/loading.png',
+          image: imgPath,
+          fit: BoxFit.fill,
         ),
       ),
     );
