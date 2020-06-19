@@ -110,10 +110,10 @@ class RecipeDetailScreen extends StatelessWidget {
                                   height: dum.height,
                                   activelevel: dum.activelevel,
                                   caloriesdone:(int.parse(recip.kiloCaloriesBurnt) +int.parse(dum.caloriesdone)).toString(),
-                                  carbs: (int.parse(recip.carbs) + int.parse(dum.carbs)).toString(),
-                                  fat: (int.parse(recip.fats) + int.parse(dum.fat)).toString(),
+                                  carbs: (int.parse(recip.carbs) + double.parse(dum.carbs)).toString(),
+                                  fat: (int.parse(recip.fats) + double.parse(dum.fat)).toString(),
                                   gender: dum.gender,
-                                  protein: (int.parse(recip.protein) +int.parse(dum.protein)).toString(),
+                                  protein: (int.parse(recip.protein) +double.parse(dum.protein)).toString(),
                                   
                                 );
                               Navigator.pop(context);
