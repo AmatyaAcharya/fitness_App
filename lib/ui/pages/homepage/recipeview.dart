@@ -23,7 +23,7 @@ class RecipeDetailScreen extends StatelessWidget {
         builder: (context, snapshot) {
           Datamod dum = snapshot.data;
           print("this is user caloriesdone: ${dum.caloriesdone}");
-          print("this is recipe kilocalorie burnt: ${recip.kiloCaloriesBurnt}");
+          //print("this is recipe kilocalorie burnt: ${recip.kiloCaloriesBurnt}");
           return Scaffold(
             backgroundColor: const Color(0xFFE9E9E9),
             body: CustomScrollView(

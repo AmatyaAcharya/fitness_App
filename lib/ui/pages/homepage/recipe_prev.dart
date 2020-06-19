@@ -158,7 +158,7 @@ class RecipeCard extends StatelessWidget {
         width: wt * 0.30,
         margin: const EdgeInsets.only(
           right: 20,
-          bottom: 10,
+          bottom: 0,
         ),
         child: Material(
           color: Colors.transparent,
@@ -187,7 +187,7 @@ class RecipeCard extends StatelessWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5),
+                  padding: const EdgeInsets.only(left: 5,),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -195,8 +195,8 @@ class RecipeCard extends StatelessWidget {
                       Text(
                         recipe.name,
                         style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13,
                           color: Colors.white,
                           //color: Color(0xFFffc226),
                         ),

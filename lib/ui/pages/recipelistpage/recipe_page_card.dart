@@ -197,8 +197,8 @@ class RecipePageCard extends StatelessWidget {
                           Text(
                             recipe.name,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
                               color: Colors.black,
                               //color: Color(0xFFffc226),
                             ),
