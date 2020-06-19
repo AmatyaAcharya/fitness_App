@@ -40,7 +40,8 @@ class UserHomeScreen extends StatelessWidget {
     final userspecifics = Provider.of<Datamod>(context) ?? dum;
     final user = Provider.of<User>(context)??dumy;
     final recip=Provider.of<List<Recipe>>(context)??[];
-    final workouts=Provider.of<List<Workouts>>(context)??[];
+    final dumm=[Workouts(workouts: " "),Workouts(workouts: " "),Workouts(workouts: " "),Workouts(workouts: " ")];
+    final workouts=Provider.of<List<Workouts>>(context)??dumm;
     //print(recip.first.name);
     final double ht = MediaQuery.of(context).size.height;
     final double wt = MediaQuery.of(context).size.width;
