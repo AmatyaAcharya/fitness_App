@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdev/Models/workout.dart';
 import 'package:flutterdev/ui/pages/homepage/saved_workout_screen.dart';
 
 class SavedWorkoutBar extends StatelessWidget {
+  final List<Workouts> workouts;
+
+  SavedWorkoutBar({this.workouts});
+
   @override
   Widget build(BuildContext context) {
     final double wt = MediaQuery.of(context).size.width;
@@ -13,7 +18,7 @@ class SavedWorkoutBar extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return SavedWorkoutScreen();
+              return SavedWorkoutScreen(workouts: workouts,);
             },
           ),
         );
@@ -41,7 +46,7 @@ class SavedWorkoutBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "YOUR SAVED ",
+                  "CHECK OUR ",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
@@ -63,26 +68,15 @@ class SavedWorkoutBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset(
-                    'assets/test1.png',
-                    width: wt * 0.2,
-                    height: wt * 0.17,
-                  ),
-                  Image.asset(
-                    'assets/test2.png',
-                    width: wt * 0.2,
-                    height: wt * 0.17,
-                  ),
-                  Image.asset(
-                    'assets/test3.png',
-                    width: wt * 0.2,
-                    height: wt * 0.17,
-                  ),
-                  Image.asset(
-                    'assets/test4.png',
-                    width: wt * 0.2,
-                    height: wt * 0.17,
-                  )
+                  for (int i = 0; i < 4; i++)
+                    FadeInImage.assetNetwork(
+                      width: wt * 0.2,
+                      height: wt * 0.17,
+                      fadeInDuration: const Duration(seconds: 1),
+                      fadeInCurve: Curves.bounceIn,
+                      placeholder: 'assets/loading.png',
+                      image: workouts[i].workouts,
+                    ),
                 ],
               ),
             )

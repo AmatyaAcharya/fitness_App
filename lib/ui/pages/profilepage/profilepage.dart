@@ -65,58 +65,49 @@ class ProfilePage extends StatelessWidget {
           });
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.grey[850], Colors.black87],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: RichText(
+          text: TextSpan(
+              style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
+              children: [
+                TextSpan(
+                  text: 'User ',
+                ),
+                TextSpan(
+                  text: 'Details',
+                  style: TextStyle(color: Colors.red[800]),
+                ),
+              ]),
         ),
-      ),
-      child: Scaffold(
+        centerTitle: true,
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: RichText(
-            text: TextSpan(
-                style: TextStyle(fontSize: 27, fontWeight: FontWeight.w400),
-                children: [
-                  TextSpan(
-                    text: 'User ',
-                  ),
-                  TextSpan(
-                    text: 'Details',
-                    style: TextStyle(color: Colors.red[800]),
-                  ),
-                ]),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          leading: IconButton(
+        elevation: 0.0,
+        leading: IconButton(
+            icon: Icon(
+              (Icons.settings),
+              color: Colors.white,
+            ),
+            onPressed: () => showSettingsPanel()),
+        actions: <Widget>[
+          FlatButton.icon(
+              label: Text(
+                'logout',
+                style: TextStyle(color: Colors.white),
+              ),
               icon: Icon(
-                (Icons.settings),
+                (Icons.close),
                 color: Colors.white,
               ),
-              onPressed: () => showSettingsPanel()),
-          actions: <Widget>[
-            FlatButton.icon(
-                label: Text(
-                  'logout',
-                  style: TextStyle(color: Colors.white),
-                ),
-                icon: Icon(
-                  (Icons.close),
-                  color: Colors.white,
-                ),
-                onPressed: () async {
-                  await _auth.signOut();
-                })
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
-          child: DetailView(),
-        ),
+              onPressed: () async {
+                await _auth.signOut();
+              })
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0),
+        child: DetailView(),
       ),
     );
   }

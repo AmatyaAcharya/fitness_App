@@ -27,7 +27,6 @@ class _RegisterState extends State<Register> {
   String password = '';
   //String ages='0';
 
-
   @override
   Widget build(BuildContext context) {
     final double ht = MediaQuery.of(context).size.height;
@@ -62,14 +61,25 @@ class _RegisterState extends State<Register> {
                       children: <Widget>[
                         Title(
                           color: Colors.white,
-                          child: Text(
-                            "REGISTER WITH US",
-                            style: TextStyle(
-                                color: Colors.red[800],
-                                fontSize: 33,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5),
-                          ),
+                          child: RichText(
+                              text: TextSpan(children: [
+                            TextSpan(
+                              text: "REGISTER ",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 33,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5),
+                            ),
+                            TextSpan(
+                              text: "WITH US",
+                              style: TextStyle(
+                                  color: Colors.red[900],
+                                  fontSize: 33,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5),
+                            )
+                          ])),
                         ),
                         SizedBox(height: 30.0),
                         TextFormField(

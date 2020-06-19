@@ -9,10 +9,10 @@ import 'package:flutterdev/ui/pages/homepage/recipeview.dart';
 //import 'package:flutterdev/ui/pages/profilepage/detail_view.dart';
 import 'package:provider/provider.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipePageCard extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeCard({this.recipe});
+  RecipePageCard({this.recipe});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,6 @@ class RecipeCard extends StatelessWidget {
     final double wt = MediaQuery.of(context).size.width;
     final user = Provider.of<User>(context);
     void showCalLeft() async {
-      
       await showDialog(
           context: context,
           builder: (context) {
@@ -42,7 +41,7 @@ class RecipeCard extends StatelessWidget {
             return StreamBuilder<Datamod>(
                 stream: DatabaseService(uid: user.uid).userspecfics,
                 builder: (context, snapshot) {
-                  Datamod dum = snapshot.data??dumm;
+                  Datamod dum = snapshot.data ?? dumm;
                   return Padding(
                     padding: EdgeInsets.only(
                       top: ht * (1 / 12),
@@ -137,7 +136,8 @@ class RecipeCard extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       User.chk = 0;
-                                      Navigator.pop(context);},
+                                      Navigator.pop(context);
+                                    },
                                   )
                                 ],
                               ),
@@ -153,15 +153,15 @@ class RecipeCard extends StatelessWidget {
 
     return InkWell(
       child: Container(
-        padding: EdgeInsets.only(right: 20),
-        color: Colors.transparent,
-        width: wt * 0.30,
-        margin: const EdgeInsets.only(
-          right: 20,
-          bottom: 0,
-        ),
+        //padding: EdgeInsets.only(right: 20),
+        //color: Colors.transparent,
+        //width: wt * 0.30,
+        // margin: const EdgeInsets.only(
+        //   right: 20,
+        //   bottom: 10,
+        // ),
         child: Material(
-          color: Colors.transparent,
+          color: Colors.grey[200], //Color(0xFFf4f4f4),
           borderRadius: BorderRadius.all(Radius.circular(20)),
           elevation: 5,
           child: Column(
@@ -173,7 +173,7 @@ class RecipeCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   child: FadeInImage.assetNetwork(
-                    width: wt * 0.25,
+                    //width: wt * 0.25,
                     fadeInDuration: const Duration(seconds: 1),
                     fadeInCurve: Curves.bounceIn,
                     placeholder: 'assets/loading.png',
@@ -187,46 +187,24 @@ class RecipeCard extends StatelessWidget {
               Flexible(
                 fit: FlexFit.tight,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5,),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        recipe.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                          color: Colors.white,
-                          //color: Color(0xFFffc226),
-                        ),
-                      ),
-
-                      Row(
+                      Column(
                         children: <Widget>[
                           Text(
-                            "${recipe.kiloCaloriesBurnt}",
+                            recipe.name,
                             style: const TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 15,
-                              //color: Color(0xFFe83323),
-                              color: Colors.white,
-                              //color: Color(0xFF816df6),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              color: Colors.black,
+                              //color: Color(0xFFffc226),
                             ),
                           ),
-                          Text(
-                            " kcal",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15,
-                              //color: Color(0xFFe83323),
-                              color: Colors.white,
-                              //color: Color(0xFF816df6),
-                            ),
-                          )
                         ],
                       ),
-
                       Row(
                         children: <Widget>[
                           Icon(Icons.access_time,
@@ -237,7 +215,7 @@ class RecipeCard extends StatelessWidget {
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 15,
-                              color: Colors.white,
+                              color: Colors.black,
                               //color: Color(0xFFde2e21),
                               //color: Color(0xFF12c444),
                             ),
@@ -245,15 +223,81 @@ class RecipeCard extends StatelessWidget {
                           Text(
                             " mins",
                             style: const TextStyle(
-                              fontWeight: FontWeight.w300,
+                              fontWeight: FontWeight.w400,
                               fontSize: 15,
                               //color: Color(0xFFe83323),
-                              color: Colors.white,
+                              color: Colors.black,
                               //color: Color(0xFF816df6),
                             ),
                           )
                         ],
                       ),
+                      Divider(
+                        color: Colors.red[900],
+                      ),
+                      SizedBox(height: 10),
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "${recipe.kiloCaloriesBurnt} ",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "kcal",
+                              style: TextStyle(
+                                color: Colors.red[900],
+                              ),
+                            ),
+                            TextSpan(text: "\n"),
+                            TextSpan(
+                              text: "${recipe.carbs}g",
+                              style: TextStyle(
+                                color: Colors.red[900],
+                              ),
+                            ),
+                            TextSpan(
+                              text: " carbs",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            TextSpan(text: "\n"),
+                            TextSpan(
+                              text: "${recipe.protein}g ",
+                              style: TextStyle(
+                                color: Colors.red[900],
+                              ),
+                            ),
+                            TextSpan(
+                              text: "protein",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            TextSpan(text: "\n"),
+                            TextSpan(
+                              text: "${recipe.fats}g ",
+                              style: TextStyle(
+                                color: Colors.red[900],
+                              ),
+                            ),
+                            TextSpan(
+                              text: "fats",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
                       //SizedBox(height: 20),
                     ],
                   ),
@@ -274,7 +318,10 @@ class RecipeCard extends StatelessWidget {
             },
           ),
         );
-        if (User.chk == 1) showCalLeft();
+        if (User.chk == 1) 
+        showCalLeft();
+
+        
       },
     );
   }

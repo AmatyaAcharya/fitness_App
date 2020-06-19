@@ -172,7 +172,8 @@ class _CalorieEditState extends State<CalorieEdit> {
                         gender: userspecifics.gender,
                         
                         );
-                      Navigator.of(context).pop();
+                       
+                       Navigator.of(context).pop();
                     }),
             ]),
       ),
