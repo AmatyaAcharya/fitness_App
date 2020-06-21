@@ -65,7 +65,7 @@ class DetailView extends StatelessWidget {
               TextSpan(
                   text: " Kgs",
                   style: TextStyle(
-                    color: Colors.red[800],
+                    color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
@@ -97,7 +97,7 @@ class DetailView extends StatelessWidget {
               TextSpan(
                   text: " cms",
                   style: TextStyle(
-                    color: Colors.red[800],
+                    color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
@@ -130,7 +130,7 @@ class DetailView extends StatelessWidget {
               TextSpan(
                   text: " yrs",
                   style: TextStyle(
-                    color: Colors.red[800],
+                    color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
@@ -162,7 +162,7 @@ class DetailView extends StatelessWidget {
               TextSpan(
                   text: " Kcals",
                   style: TextStyle(
-                    color: Colors.red[800],
+                    color: Colors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
@@ -192,33 +192,35 @@ class DetailView extends StatelessWidget {
               ),
               if(double.parse(userspecifics.bmi)>=25.0)
               TextSpan(
-                  text: ": OverWeight, ",
+                  text: ": OverWeight",
                   style: TextStyle(
-                    color: Colors.red[900],
+                    color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
                   ))
                   else if(double.parse(userspecifics.bmi)<=18.4)
                   TextSpan(
-                  text: ": UnderWeight, ",
+                  text: ": UnderWeight",
                   style: TextStyle(
-                    color: Colors.red[900],
+                    color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
                   ))
                   else
                   TextSpan(
-                  text: ": Healthy, ",
+                  text: ": Healthy",
                   style: TextStyle(
-                    color: Colors.red[900],
+                    color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2.0,
                   )),
+                 TextSpan(text:'\n'),
+                 TextSpan(text:'\n'),
                   TextSpan(
-                  text: "a healthy range is between 18.5 to 24.9",
+                  text: "**a healthy range is between 18.5 to 24.9",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 13,
